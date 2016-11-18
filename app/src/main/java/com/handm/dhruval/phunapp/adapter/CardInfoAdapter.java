@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.handm.dhruval.phunapp.R;
+import com.handm.dhruval.phunapp.helper.FeedSharingHelper;
 import com.handm.dhruval.phunapp.helper.RoundedTransformation;
 import com.handm.dhruval.phunapp.model.CardInfo;
 import com.squareup.picasso.Picasso;
@@ -28,6 +29,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
         private TextView titleView;
         private TextView locationView;
         private TextView descriptionView;
+        private TextView share;
 
         public ViewHolder(View view) {
             super(view);
@@ -36,6 +38,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
             titleView = (TextView) view.findViewById(R.id.title);
             locationView = (TextView) view.findViewById(R.id.location);
             imageView = (ImageView) view.findViewById(R.id.image);
+            share = (TextView)view.findViewById(R.id.share);
         }
     }
 
@@ -67,6 +70,14 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
                 .placeholder(R.drawable.placeholder_nomoon)
                 .error(R.drawable.placeholder_nomoon)
                 .into(holder.imageView);
+
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FeedSharingHelper feedSharingHelper = new FeedSharingHelper(context);
+                feedSharingHelper.shareClickAction(cardInfo.description);
+            }
+        });
     }
 
     @Override

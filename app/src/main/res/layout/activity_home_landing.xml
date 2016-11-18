@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context="com.handm.dhruval.phunapp.HomeLanding">
+    tools:context="com.handm.dhruval.phunapp.ui.HomeLanding">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.handm.dhruval.phunapp;
+package com.handm.dhruval.phunapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.handm.dhruval.phunapp.R;
 import com.handm.dhruval.phunapp.adapter.CardInfoAdapter;
 import com.handm.dhruval.phunapp.model.CardInfo;
 import com.loopj.android.http.AsyncHttpClient;

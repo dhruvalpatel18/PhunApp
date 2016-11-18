@@ -2,10 +2,11 @@ package com.handm.dhruval.phunapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.LinearLayout;
 
+import com.handm.dhruval.phunapp.adapter.CardInfoAdapter;
 import com.handm.dhruval.phunapp.model.CardInfo;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -23,8 +24,9 @@ public class HomeLanding extends AppCompatActivity {
 
     private static final String LOG_TAG = HomeLanding.class.getSimpleName();
     private static final String BASE_URL = "https://raw.githubusercontent.com/phunware/dev-interview-homework/master/feed.json";
-    private LinearLayout linearLayout;
+    private RecyclerView.LayoutManager mLayoutManager;
 
+    CardInfoAdapter cardInfoAdapter;
     RecyclerView recyclerView;
     List<CardInfo> cardInfoList = new ArrayList<>();
 
@@ -33,7 +35,16 @@ public class HomeLanding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_landing);
 
+        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        cardInfoAdapter = new CardInfoAdapter(this, cardInfoList);
+        recyclerView.setAdapter(cardInfoAdapter);
+
         getFeed();
+
     }
 
     private void getFeed() {
@@ -63,5 +74,7 @@ public class HomeLanding extends AppCompatActivity {
                 Log.e(LOG_TAG, "Failed to parse json object", e);
             }
         }
+        cardInfoAdapter.setCardInfoList(cardInfoList);
+        cardInfoAdapter.notifyDataSetChanged();
     }
 }

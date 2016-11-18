@@ -17,7 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.FeedDetailScreenActivity"></activity>
+        <activity android:name=".ui.FeedDetailScreenActivity"
+            android:parentActivityName=".ui.HomeLanding"
+            android:theme="@style/DetailViewTheme"></activity>
     </application>
 
 </manifest>

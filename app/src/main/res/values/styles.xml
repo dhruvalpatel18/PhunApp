@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DetailViewTheme" parent="AppTheme">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
     <style name="CardInfoTextStyle">
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>

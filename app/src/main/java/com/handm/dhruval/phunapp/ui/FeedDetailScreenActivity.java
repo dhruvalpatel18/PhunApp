@@ -1,3 +1,20 @@
+
+/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.handm.dhruval.phunapp.ui;
 
 import android.content.Intent;
@@ -50,6 +67,7 @@ public class FeedDetailScreenActivity extends AppCompatActivity {
         setViewContents();
     }
 
+    /** Initialize all the view in the layout and set color in Actionbar if user scrolls. */
     private void initView() {
         title = (TextView)findViewById(R.id.detail_title);
         time = (TextView)findViewById(R.id.detail_time);
@@ -70,6 +88,7 @@ public class FeedDetailScreenActivity extends AppCompatActivity {
         });
     }
 
+    /** set Json data in to views. */
     private void setViewContents() {
         Intent intent = getIntent();
 
@@ -88,6 +107,7 @@ public class FeedDetailScreenActivity extends AppCompatActivity {
                 .into(imageView);
     }
 
+    /** Parse date string in to date and change to expected format then convert again in to string. */
     public static String  parseDate(String dateTimeStr) {
         Date date = new Date();
         try {

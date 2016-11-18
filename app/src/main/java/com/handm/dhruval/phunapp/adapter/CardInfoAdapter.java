@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.handm.dhruval.phunapp.R;
+import com.handm.dhruval.phunapp.helper.RoundedTransformation;
 import com.handm.dhruval.phunapp.model.CardInfo;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +63,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
                 .load(cardInfo.image)
                 .resize(50, 50)
                 .centerCrop()
+                .transform(new RoundedTransformation(100, 0))
                 .placeholder(R.drawable.placeholder_nomoon)
                 .error(R.drawable.placeholder_nomoon)
                 .into(holder.imageView);

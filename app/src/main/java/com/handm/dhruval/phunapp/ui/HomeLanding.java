@@ -2,9 +2,11 @@ package com.handm.dhruval.phunapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,7 +30,7 @@ public class HomeLanding extends AppCompatActivity {
 
     private static final String LOG_TAG = HomeLanding.class.getSimpleName();
     private static final String BASE_URL = "https://raw.githubusercontent.com/phunware/dev-interview-homework/master/feed.json";
-    private RecyclerView.LayoutManager mLayoutManager;
+    private GridLayoutManager gridLayoutManager;
 
     CardInfoAdapter cardInfoAdapter;
     RecyclerView recyclerView;
@@ -43,8 +45,17 @@ public class HomeLanding extends AppCompatActivity {
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
+
+        Display display = this.getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float density  = getResources().getDisplayMetrics().density;
+        float dpWidth  = outMetrics.widthPixels / density;
+        int columns = Math.round(dpWidth / 400);
+
+        gridLayoutManager = new GridLayoutManager(this, columns);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         emptyTextView = (TextView) findViewById(R.id.emptyTextView);
         emptyTextView.setText(R.string.loading);

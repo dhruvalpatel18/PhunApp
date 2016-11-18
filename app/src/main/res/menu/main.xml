@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.handm.dhruval.phunapp.ui.FeedDetailScreenActivity">
+
+    <item android:id="@+id/action_call"
+        android:title="@string/settings_menu_item_call"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:icon="@android:drawable/stat_sys_phone_call"/>
+
+    <item android:id="@+id/action_share"
+        android:title="@string/settings_menu_item_share"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_share"/>
+
+</menu>

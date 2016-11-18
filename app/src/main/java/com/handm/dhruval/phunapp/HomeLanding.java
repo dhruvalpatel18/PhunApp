@@ -1,12 +1,10 @@
 package com.handm.dhruval.phunapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.handm.dhruval.phunapp.model.CardInfo;
 import com.loopj.android.http.AsyncHttpClient;
@@ -55,7 +53,15 @@ public class HomeLanding extends AppCompatActivity {
 
     private void parseResponseToCardInfo(JSONArray response) {
 
-        Log.i(LOG_TAG, response.toString());
+        for (int i = 0; i < response.length(); i++) {
+            try {
+                JSONObject jsonObject = response.getJSONObject(i);
 
+                CardInfo cardInfo = new CardInfo(jsonObject);
+                cardInfoList.add(cardInfo);
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Failed to parse json object", e);
+            }
+        }
     }
 }

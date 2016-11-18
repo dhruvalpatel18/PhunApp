@@ -4,4 +4,5 @@
     <string name="share_to">Share feed to</string>
     <string name="settings_menu_item_call">Call</string>
     <string name="settings_menu_item_share">Share</string>
+    <string name="loading">loading...</string>
 </resources>

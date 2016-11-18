@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.handm.dhruval.phunapp.R;
 import com.handm.dhruval.phunapp.adapter.CardInfoAdapter;
@@ -29,6 +32,8 @@ public class HomeLanding extends AppCompatActivity {
 
     CardInfoAdapter cardInfoAdapter;
     RecyclerView recyclerView;
+    TextView emptyTextView;
+    ProgressBar progressBar;
     List<CardInfo> cardInfoList = new ArrayList<>();
 
     @Override
@@ -40,6 +45,12 @@ public class HomeLanding extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
+
+        emptyTextView = (TextView) findViewById(R.id.emptyTextView);
+        emptyTextView.setText(R.string.loading);
+
+        progressBar = (ProgressBar) findViewById(R.id.main_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
 
         cardInfoAdapter = new CardInfoAdapter(this, cardInfoList);
         recyclerView.setAdapter(cardInfoAdapter);
@@ -75,7 +86,18 @@ public class HomeLanding extends AppCompatActivity {
                 Log.e(LOG_TAG, "Failed to parse json object", e);
             }
         }
-        cardInfoAdapter.setCardInfoList(cardInfoList);
-        cardInfoAdapter.notifyDataSetChanged();
+
+        if (cardInfoList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyTextView.setVisibility(View.VISIBLE);
+        }
+        else {
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyTextView.setVisibility(View.GONE);
+
+            cardInfoAdapter.setCardInfoList(cardInfoList);
+            cardInfoAdapter.notifyDataSetChanged();
+        }
     }
 }

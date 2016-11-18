@@ -1,6 +1,7 @@
 package com.handm.dhruval.phunapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.handm.dhruval.phunapp.R;
 import com.handm.dhruval.phunapp.helper.FeedSharingHelper;
 import com.handm.dhruval.phunapp.helper.RoundedTransformation;
 import com.handm.dhruval.phunapp.model.CardInfo;
+import com.handm.dhruval.phunapp.ui.FeedDetailScreenActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,6 +32,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
         private TextView locationView;
         private TextView descriptionView;
         private TextView share;
+        private View view;
 
         public ViewHolder(View view) {
             super(view);
@@ -39,6 +42,7 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
             locationView = (TextView) view.findViewById(R.id.location);
             imageView = (ImageView) view.findViewById(R.id.image);
             share = (TextView)view.findViewById(R.id.share);
+            this.view = view;
         }
     }
 
@@ -71,6 +75,13 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
                 .error(R.drawable.placeholder_nomoon)
                 .into(holder.imageView);
 
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFeedDetailsScreen(context, cardInfo);
+            }
+        });
+
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +98,17 @@ public class CardInfoAdapter extends RecyclerView.Adapter<CardInfoAdapter.ViewHo
 
     public void setCardInfoList(List<CardInfo> cardInfoList){
         this.cardInfoList = cardInfoList;
+    }
+
+    private void openFeedDetailsScreen(Context context, CardInfo cardInfo) {
+        Intent intent = new Intent(context, FeedDetailScreenActivity.class);
+        intent.putExtra(CardInfo.JSON_TITLE, cardInfo.title);
+        intent.putExtra(CardInfo.JSON_TIMESTAMP, cardInfo.timeStamp);
+        intent.putExtra(CardInfo.JSON_DESCRIPTION, cardInfo.description);
+        intent.putExtra(CardInfo.JSON_IMAGE, cardInfo.image);
+        intent.putExtra(CardInfo.JSON_PHONE, cardInfo.phoneNum);
+
+        context.startActivity(intent);
     }
 }
 

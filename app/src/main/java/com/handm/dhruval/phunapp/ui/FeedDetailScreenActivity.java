@@ -9,8 +9,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class FeedDetailScreenActivity extends AppCompatActivity {
     TextView title, time, description;
     ImageView imageView;
     String mPhoneNum;
+    ScrollView scrollView;
 
     ActionBar actionBar;
 
@@ -52,6 +55,19 @@ public class FeedDetailScreenActivity extends AppCompatActivity {
         time = (TextView)findViewById(R.id.detail_time);
         imageView = (ImageView)findViewById(R.id.imageView);
         description = (TextView)findViewById(R.id.detail_description);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                final int scrollY = scrollView.getScrollY();
+
+                if (scrollY > 0) {
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+                }else {
+                    actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
+                }
+            }
+        });
     }
 
     private void setViewContents() {
